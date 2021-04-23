@@ -1,0 +1,27 @@
+<!-- <h4>Database Management Systems</h4>
+
+<hr /> -->
+
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
+  <li ngbNavItem="employees">
+    <a ngbNavLink>Employees</a>
+    <ng-template ngbNavContent>
+      <app-employee></app-employee>
+    </ng-template>
+  </li>
+  <li ngbNavItem="departments">
+    <a ngbNavLink>Departments</a>
+    <ng-template ngbNavContent>
+      <app-department></app-department>
+    </ng-template>
+  </li>
+  <li ngbNavItem="projects">
+    <a ngbNavLink>Projects</a>
+    <ng-template ngbNavContent>
+      <app-project></app-project>
+    </ng-template>
+  </li>
+
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

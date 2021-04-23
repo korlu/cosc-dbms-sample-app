@@ -1,0 +1,58 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h4 class="card-title">Employees</h4>
+      <button type="button" class="btn btn-outline-info mb-2" (click)="add(content)">Add Employee</button>
+    </div>
+
+    <table class="table table-hover table-striped table-responsive-lg">
+      <thead class="bg-secondary">
+        <th>Name</th>
+        <th>SSN</th>
+        <!-- <th>Birth Date</th> -->
+        <th>Address</th>
+        <th>Sex</th>
+        <th>Salary</th>
+        <th>Supervisor</th>
+        <th>Department</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td class="text-nowrap">
+            {{ employee.Fname }}
+            {{ employee.Minit }}
+            {{ employee.Lname }}</td>
+          <td>{{ employee.Ssn }}</td>
+          <!-- <td>{{ employee.Bdate | date }}</td> -->
+          <td>{{ employee.Address }}</td>
+          <td class="text-center">{{ employee.Sex }}</td>
+          <td>{{ employee.Salary | currency : 'USD':'symbol':'3.0-2' }}</td>
+          <td>{{ employee.Super_ssn }}</td>
+          <td class="text-nowrap">{{ employee.Dno }}</td>
+          <td class="text-center text-nowrap">
+            <button type="button" class="btn btn-primary mr-3" (click)="edit(employee, content)">Edit</button>
+            <button type="button" class="btn btn-danger"
+              [swal]="{ title: 'Delete Record', text: 'Are you sure you want to delete this employee?',  showCancelButton: true }"
+              (confirm)="remove(employee)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ selectedEmployee.Fname ? selectedEmployee.Fname : 'Adding Employee' }} {{ selectedEmployee.Lname }}
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-edit-employee [employee]="selectedEmployee" (save)="modal.close($event)" (cancel)="modal.dismiss()">
+    </app-edit-employee>
+  </div>
+</ng-template>

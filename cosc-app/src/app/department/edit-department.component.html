@@ -1,0 +1,35 @@
+<form (ngSubmit)="onSubmit()" #frmDepartment="ngForm">
+  <div class="card">
+    <div class="card-body row">
+      <div class="form-group col-sm-12">
+        <label for="Dname">Department Name</label>
+        <input [(ngModel)]="department.Dname" name="dname" class="form-control" maxlength="15"
+          placeholder="Department Name">
+      </div>
+
+      <div class="form-group col-sm-3">
+        <label for="Dname">Dept #</label>
+        <input [(ngModel)]="department.Dnumber" name="dnumber" class="form-control" maxlength="4" placeholder="Dept #">
+      </div>
+
+      <div class="form-group col-sm-6">
+        <label for="mgr_ssn">Manager SSN</label>
+        <select class="form-control" [(ngModel)]="department.Mgr_ssn" name="mgr_ssn">
+          <option *ngFor="let manager of managers | async" [value]="manager.Ssn">{{ manager.Ssn }} - {{manager.Name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group col-sm-3">
+        <label for="Lname">Manager Start Date</label>
+        <input [(ngModel)]="department.Mgr_start_date" name="mgr_start_date" class="form-control" maxlength="10"
+          placeholder="Manager Start Date">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary mr-2" (click)="cancelAction()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!frmDepartment.valid">Save Changes</button>
+  </div>
+</form>

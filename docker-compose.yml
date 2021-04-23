@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  cosc_webapi:
+    image: wvthompson/cosc-dbms-webapi
+    restart: unless-stopped
+    container_name: cosc-webapi
+    ports:
+      - '8282:80'
+      # - '4430:443'
+    environment:
+      DbSettings:Server: mssql
+      DbSettings:Password: COSC*457
+    depends_on:
+      - mssql
+
+  cosc_app:
+    image: wvthompson/cosc-dbms-app
+    restart: unless-stopped
+    container_name: cosc-app
+    ports:
+      - '8888:80'
+    depends_on:
+      - cosc_webapi
+
+  mssql:
+    image: wvthompson/cosc-mssql-db
+    restart: unless-stopped
+    container_name: mssql-db
+    ports:
+      - '14330:1433'
+    volumes:
+      - mssql-data:/var/opt/mssql
+    environment:
+      # ACCEPT_EULA: 'Y'
+      SA_PASSWORD: COSC*457
+
+volumes:
+  mssql-data:
+    # driver: local

@@ -1,0 +1,31 @@
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <h4>SQL Query Editor</h4>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="form-group">
+        <textarea [(ngModel)]="sqlQuery" name="query" id="query" class="form-control" rows="6"
+          aria-describedby="helpId"></textarea>
+        <small id="helpId" class="text-muted">Enter your SQL query/statement</small>
+      </div>
+
+      <div class="form-group">
+        <button type="reset" class="btn btn-secondary mr-2" (click)="cancel()">Reset</button>
+        <button type="submit" class="btn btn-primary" [disabled]="sqlQuery.length < 10">Eexecute Query</button>
+        <label for="prettify" class="ml-3">
+          <input class="mr-1" type="checkbox" name="prettify" id="prettify" [(ngModel)]="prettify">Pre-format Output
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="submit" class="card text-left">
+    <div class="card-body">
+      <h4 class="card-title">Result</h4>
+      <p *ngIf="!prettify" class="card-text">
+        {{ result$ | async | json }}
+      </p>
+      <pre *ngIf="prettify">{{ result$ | async | json }}</pre>
+    </div>
+  </div>
+</form>
