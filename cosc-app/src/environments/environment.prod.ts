@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUri: `http://cosc_webapi/api/`
+  apiBaseUri: `http://cosc_webapi/api/database`
 };

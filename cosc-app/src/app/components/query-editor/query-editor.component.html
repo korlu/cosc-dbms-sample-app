@@ -13,7 +13,7 @@
         <button type="reset" class="btn btn-secondary mr-2" (click)="cancel()">Reset</button>
         <button type="submit" class="btn btn-primary" [disabled]="sqlQuery.length < 10">Eexecute Query</button>
         <label for="prettify" class="ml-3">
-          <input class="mr-1" type="checkbox" name="prettify" id="prettify" [(ngModel)]="prettify">Pre-format Output
+          <input class="mr-1" type="checkbox" name="prettify" id="prettify" [(ngModel)]="prettify">JSON Output
         </label>
       </div>
     </div>
@@ -22,9 +22,28 @@
   <div *ngIf="submit" class="card text-left">
     <div class="card-body">
       <h4 class="card-title">Result</h4>
-      <p *ngIf="!prettify" class="card-text">
+
+      <!-- QUERY RESULT -->
+      <ng-container *ngIf="(result$ | async) as items">
+        <section *ngIf="!prettify" class="mb-4">
+          <table class="table table-bordered table-sm table-hover table-striped">
+            <thead>
+              <tr class="result-header">
+                <th *ngFor="let header of objectKeys(items[0])">{{ header }}</th>
+              </tr>
+            </thead>
+            <tbody class="result-body">
+              <tr *ngFor="let row of items">
+                <td *ngFor="let column of objectValues(row)">{{ column }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </ng-container>
+
+      <!-- <p *ngIf="!prettify" class="card-text">
         {{ result$ | async | json }}
-      </p>
+      </p> -->
       <pre *ngIf="prettify">{{ result$ | async | json }}</pre>
     </div>
   </div>

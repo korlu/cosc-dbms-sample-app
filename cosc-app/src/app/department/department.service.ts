@@ -16,7 +16,7 @@ export class DepartmentService extends DataService {
   }
 
   remove(dnumber: number): void {
-    const sql: SQLStatement = { text: `DELETE FROM Department WHERE Dnumber = '${dnumber}'`};
+    const sql: SQLStatement = { text: `DELETE FROM Department WHERE Dnumber = '${dnumber}'` };
     this.http.post(this.baseUrl, sql).subscribe();
   }
 
@@ -25,7 +25,7 @@ export class DepartmentService extends DataService {
     const sql = `INSERT INTO Department (Dname, Dnumber, Mgr_ssn, Mgr_start_date)
       VALUES ('${dept.Dname}', ${+dept.Dnumber}, '${dept.Mgr_ssn}', ${this.toStringOrNull(dept.Mgr_start_date)})`;
 
-      console.log(sql);
+    console.log(sql);
     this.http.post(this.baseUrl, { text: sql }).pipe(take(1)).subscribe();
   }
 

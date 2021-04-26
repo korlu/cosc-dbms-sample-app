@@ -13,6 +13,8 @@ export class QueryEditorComponent implements OnInit {
   submit = false;
   prettify = false;
   result$: Observable<any>;
+  objectKeys = Object.keys;
+  objectValues = Object.values;
 
   constructor(private dbService: QueryEditorService) { }
 

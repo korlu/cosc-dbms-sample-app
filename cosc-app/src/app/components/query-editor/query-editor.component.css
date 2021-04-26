@@ -12,3 +12,10 @@ textarea#query {
   height: 28px;
   vertical-align: middle;
 }
+
+
+.table th:last-of-type,
+.table td:last-of-type {
+  text-align: inherit;
+  white-space: nowrap;
+}
