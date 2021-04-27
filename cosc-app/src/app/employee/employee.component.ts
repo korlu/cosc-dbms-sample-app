@@ -44,7 +44,7 @@ export class EmployeeComponent implements OnInit, OnDestroy  {
     this.modalService.open(content, this.modalConfig).result
       .then((data: IEmployee) => {
         // check if employee
-        const index = this.employees.findIndex(emp => emp.Ssn !== employee.Ssn);
+        const index = this.employees.findIndex(emp => emp.Ssn === data.Ssn);
 
         if (index !== -1) { // editing existing record
           this.employees.splice(index, 1, data);
